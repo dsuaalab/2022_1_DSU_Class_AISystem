@@ -2,6 +2,7 @@ import pandas as pd
 
 
 df = pd.read_csv('dataset/data.csv', encoding='euc-kr')
+#'euc-kr' 인코딩을 사용해 한글 csv 파일 읽기
 
 df.rename(columns={'내국인업종코드(SB_UPJONG_CD)': 'SB_UPJONG_CD'}, inplace=True)
 df.rename(columns={'성별(SEX_CCD)': 'SEX_CCD'}, inplace=True)
@@ -10,6 +11,11 @@ df.rename(columns={'카드이용건수(USECT_CORR)': 'USECT_CORR'}, inplace=True
 
 df['SB_UPJONG_CD'] = df['SB_UPJONG_CD'].str.replace(r'\D', '')
 
+df['SEX_CCD'] = df['SEX_CCD'].str.replace('M', '1')
+#SEX_CCD의 M을 1로 변환
+
+df['SEX_CCD'] = df['SEX_CCD'].str.replace('F', '0')
+#SEX_CCD의 F를 0으로 변환
 
 data = df.dropna(how='any')
 
